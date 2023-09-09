@@ -75,7 +75,8 @@ a[data-token-index] svg.page {
   /* normalizes banner / page title width */
   .notion-scroller > div:not([class]),
   .notion-scroller > div > div:not([class]) {
-    width: 100% !important;
+    width: var(--mobile-width) !important;
+    margin: auto !important;
     max-width: 960px !important;
     padding-left: 0 !important;
     padding-right: 0 !important;
