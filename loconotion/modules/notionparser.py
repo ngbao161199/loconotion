@@ -432,6 +432,12 @@ class Parser:
                 tag.attrs[attr] = value
             log.debug(f"Adding meta tag {str(tag)}")
             soup.head.append(tag)
+            
+            # add mobile - compatible
+            metatag = soup.new_tag('meta')
+            metatag.attrs['name'] = 'viewport'
+            metatag.attrs['content'] = 'width=device-width, initial-scale=1.0'
+            soup.head.append(metatag)
 
     def process_images_and_emojis(self, soup):
         # process images & emojis
