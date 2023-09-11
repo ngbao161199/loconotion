@@ -425,6 +425,9 @@ class Parser:
 
     def set_custom_meta_tags(self, url, soup):
         # set custom meta tags
+        content_to_remove = 'width=device-width,height=device-height,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover'
+        for meta_tag in soup.find_all('meta', attrs={'name': 'viewport', 'content': content_to_remove}):
+            meta_tag.decompose()
         # add mobile - compatible
         metatag = soup.new_tag('meta')
         metatag.attrs['name'] = 'viewport'
