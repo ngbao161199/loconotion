@@ -425,19 +425,24 @@ class Parser:
 
     def set_custom_meta_tags(self, url, soup):
         # set custom meta tags
-        custom_meta_tags = self.get_page_config(url).get("meta", [])
-        for custom_meta_tag in custom_meta_tags:
-            tag = soup.new_tag("meta")
-            for attr, value in custom_meta_tag.items():
-                tag.attrs[attr] = value
-            log.debug(f"Adding meta tag {str(tag)}")
-            soup.head.append(tag)
+        # add mobile - compatible
+        metatag = soup.new_tag('meta')
+        metatag.attrs['name'] = 'viewport'
+        metatag.attrs['content'] = 'width=device-width, initial-scale=1.0'
+        soup.head.append(metatag)
+        #custom_meta_tags = self.get_page_config(url).get("meta", [])
+        #for custom_meta_tag in custom_meta_tags:
+            #tag = soup.new_tag("meta")
+            #for attr, value in custom_meta_tag.items():
+            #    tag.attrs[attr] = value
+            #log.debug(f"Adding meta tag {str(tag)}")
+            #soup.head.append(tag)
             
             # add mobile - compatible
-            metatag = soup.new_tag('meta')
-            metatag.attrs['name'] = 'viewport'
-            metatag.attrs['content'] = 'width=device-width, initial-scale=1.0'
-            soup.head.append(metatag)
+            #metatag = soup.new_tag('meta')
+            #metatag.attrs['name'] = 'viewport'
+            #metatag.attrs['content'] = 'width=device-width, initial-scale=1.0'
+            #soup.head.append(metatag)
 
     def process_images_and_emojis(self, soup):
         # process images & emojis
